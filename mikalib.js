@@ -114,7 +114,7 @@
     };
     
     
-	
+
 	mika.extend({
 	mikaVer:"0.1",
 	string:{},
@@ -124,8 +124,8 @@
 	ajax:{}
 	});
 
-	
-	
+
+
     //*******************************************************
     //判断浏览器类型及其版本号
     //*******************************************************
@@ -138,14 +138,14 @@
     if (mika.browser.safari) {
         mika.browser.version = /(version)[\/]([\d.]+)/.exec(ua);
     }
-	
-	
+
+
     
 
     //*******************************************************
     //数据类型检测判断
     //*******************************************************
-	
+
 	/*
 	
 	目前已完成的方法：
@@ -480,25 +480,25 @@
 					!tags.indexOf("<col") &&[ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ] ||
 					mika.browser.msie &&[ 1, "div<div>", "</div>" ] || 
 					[ 0, "", "" ];
-					
+
 					div.innerHTML=warp[1]+elem+warp[2];
-					
+
 					while(warp[0]--){
 						div=div.lastChild;
 						}
 
 					elem = mika.makeArray(div.childNodes);
-					
+
 					}
-					
+
 			if ( elem.length === 0 && (!mika.nodeName( elem, "form" ) && !mika.nodeName( elem, "select" )) )
 				return;
-				
+
 			if (elem.nodeName)
 				result.push( elem );
 			else			
 				result = mika.merge( result, elem );
-	
+
     		});
     		
     		
@@ -571,7 +571,7 @@
 			var fixthis=this;
 			mika.each(args,function(){mika(this).append(fixthis);});
 			});
-		
+
 
         },
 
@@ -579,13 +579,13 @@
         prepend: function() {
            return this.insertDom(arguments,true,-1,function(elem){
 		     this.insertBefore(elem,this.firstChild);
-			
+
 		   });
         },
-		
+
 		 //在匹配元素之前插入内容
         before: function() {
-		
+
 		 return this.insertDom(arguments,false,1,function(elem){
 		    this.parentNode.insertBefore(elem,this);
 		   });
@@ -594,7 +594,7 @@
         
 		//在匹配元素之后插入内容
         after: function() {
-		
+
 		 return this.insertDom(arguments,false,-1,function(elem){
 		    this.parentNode.insertBefore(elem,this.nextSibling);
 		   });
@@ -636,7 +636,7 @@
         
         //获取或设置匹配元素的value内容
         val: function(value) {
-		
+
 		 if (value===undefined) {
                 return (this[0] && this[0].value) || null;
             }
@@ -653,7 +653,7 @@
     //元素属性操作
     //*******************************************************
     mika.extend({
-	
+
 	//dom元素属性设置，获取
     attr:function(elem,key,value){
     	if(!(elem&&(elem.nodeType===1 || elem.nodeType===9)) || !mika.isNotEmptyString(key)){
@@ -744,14 +744,14 @@
     	
     }	
     });
-	
-	
+
+
 	//*******************************************************
     //元素样式操作
     //*******************************************************
-	
-	
-	
+
+
+
 	//DOM元素上的CLASSNAME处理
 	mika.extend(mika.className,{
 	    	add:function(elem,strclass){
@@ -775,9 +775,9 @@
     		var reg = new RegExp(' '+strclass+' ');
     		return reg.test(' '+elem.className+' ') ? true : false;
     	}
-	
+
 	});
-	
+
       
     
     
@@ -823,7 +823,7 @@
     				this.removeAttribute(name);
     			} 
            });
-	
+
     	},
     	css:function(key,value){
     		if(value===undefined){
@@ -883,7 +883,7 @@
     //*******************************************************
     //事件操作,参考DE大神的addEvent，John Resig的jquery lib
     //*******************************************************
-	
+
 	/*
 	
 	目前已实现的方法:
@@ -903,7 +903,7 @@
 	
 	
 	*/
-	
+
 	mika.extend(mika.event,{
 	addEventListener:document.addEventListener ? function(elem,type,handle){elem.addEventListener(type,handle,false);}:function(elem,type,handle){elem.attachEvent('on'+type,handle);},
 	removeEventListener:document.removeEventListener ? function(elem,type,handle){elem.removeEventListener(type,handle,false);}:function(elem,type,handle){elem.detachEvent('on'+type,handle);},
@@ -914,30 +914,30 @@
    
 	if(!event.target)
 	 event.target=event.srcElement || document;
-	 
+
 	if (event.target.nodeType == 3)
 	 event.target = event.target.parentNode;
-	 
+
 	if(!event.preventDefault)
 	 event.preventDefault=function(){event.returnValue=false;};
-	 
+
 	if(!event.stopPropagation)
 	 event.stopPropagation=function(){event.cancelBubble=true;};
-	 
+
 	//为IE event对象添加pageX，pageY
 	if ( event.pageX == null && event.clientX != null ) {
 			var doc = document.documentElement, body = document.body;
 			event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc.clientLeft || 0);
 			event.pageY = event.clientY + (doc && doc.scrollTop || body && body.scrollTop || 0) - (doc.clientTop || 0);
     }
-	 
-	
+
+
 
      return event;
 	 },
 	 //绑定事件核心方法
 	 bind:function(elem,type,handler){
-	 
+
 	 if(!elem.events) elem.events={};
 	 var handlers=elem.events[type];
 	 if(!handlers) {
@@ -949,14 +949,14 @@
 	 }
 	 }
 	 if(!handler.guid){handler.guid=this.guid++}
-	 
+
 	 handlers[handler.guid]=handler;
-	 
+
 	 elem["on"+type]= function(event){
-	 
+
 	 event=mika.event.fix(event|| window.event);
 	 var listfns=this.events[event.type];
-	 
+
 	 for(var index in listfns ){
 	 if(listfns[index].call(this,event)===false){
 	 event.preventDefalut();
@@ -964,17 +964,17 @@
 	 return false;
 	 }
 	 }
-	 
+
 	 return true;
-	 
+
 	 };
-	 
+
 	 //提供trigger使用
 	 if(!this.global[type]) this.global[type]=[];
 	 this.global[type].push(elem);
-	 
+
 	 },
-	 
+
 	 //移除事件
 	 unbind:function(elem,type,handler){
 	 if(handler){
@@ -989,45 +989,45 @@
 	 this.unbind(elem,te);
 	 }
 	 }
-	 
-	 
+
+
 	 }
-	 
+
 	 },
 	 //触发特定事件
 	 trigger:function(type,data,elem){
 	 data=data||[];
 	 if(!elem){
-	 
+
 	 var arrelem=this.global[type];
 	 if(arrelem){
 	 for(var index=0,len=arrelem.length;index<len;index++){
 	 this.trigger(type,data,arrelem[index]);
 	 }
-	 
+
 	 }
 	 }
-	 
+
 	 else if(elem["on"+type]){
 	 data.unshift( this.fix({ type: type, target: elem}) );
 	 elem["on"+type].apply(elem,data);
 	 }
-	 
+
 	 },
 	 //只运行一次的事件
 	 one:function(elem,type,handler){
-	 
+
 	 var fixedhandler=function(event){
 	 mika.event.unbind(elem,type,arguments.callee);
 	 handler.call(elem,event);
 	 }
 	 this.bind(elem,type,fixedhandler);
 	 },
-	 
+
 	 //DOMContentLoaded时执行的function
 	onDomReady:function(callback){
-	 
-	 
+
+
 	mika.isready = false; 
     mika.readylist=mika.readylist||[];
     
@@ -1049,16 +1049,16 @@
 	 mika.readylist.shift();
 	 }
 	 }     
-	 
 
 
-	 
+
+
 	 if(document.addEventListener){
 	 document.addEventListener("DOMContentLoaded",function(){
 	 document.removeEventListener("DOMContentLoaded",arguments.callee,false);
 	 doReady();
 	 },false);
-	 
+
 	 }
 	 else if(document.attachEvent){
 	 document.attachEvent("onreadystatechange",function(){
@@ -1067,7 +1067,7 @@
 	 doReady();
 	 }
 	 });
-	 
+
 	 if(document.documentElement.doScroll && window==window.top){
 	 (function(){
 	 try{document.documentElement.doScroll("left");}
@@ -1080,11 +1080,11 @@
 	 }
 	 }
 	 mika.event.bind(window,"load",doReady);
-	 
+
 	 }
 
 	});
-	
+
 	 //将事件处理函数绑定到mika的实例对象上
 	 mika.fn.extend({
 	 bind:function(type,handler){
@@ -1100,10 +1100,10 @@
 	  return this.each(function(){mika.event.trigger(type,data,this)});
 	 }
 	 });
-	 
-	 
-	 
-	 
+
+
+
+
 	 //fn.bind的快捷方式
 	 mika.each("blur,focus,load,resize,scroll,unload,click,dblclick,mousedown,mouseup,mousemove,mouseover,mouseout,change,reset,select,submit,keydown,keypress,keyup,error".split(','),function(index,evtype){
 	 mika.fn[evtype]=function(fn){
@@ -1111,10 +1111,10 @@
 	 };
 	 //mika.fn["un"+evtype]=function(fn){this.unbind(evtype,fn)};
 	 });
-	 
 
-	 
-	 
+
+
+
     //ajax处理
 	/*
 	目前已实现
@@ -1145,7 +1145,7 @@
 	script.onload = script.onreadystatechange = null;
 	script.parentNode.removeChild(script);
 	}
-	
+
 	};
 	var head=document.getElementsByTagName("head")[0];
 	head.appendChild(script);
@@ -1167,14 +1167,14 @@
 	css.onload = css.onreadystatechange = null;
 	css.parentNode.removeChild(css);
 	}
-	
+
 	};
 	var head=document.getElementsByTagName("head")[0];
 	head.appendChild(css);
 	return undefined;
 	},
 	get:function(url,data,callback,dataType){
-	
+
 	if(mika.isFunction(data)){
     callback=data;
 	data=null;
@@ -1187,10 +1187,10 @@
 	success:callback||null,
 	dataType:dataType||"HTML"
 	});
-	
+
 	},
 	post:function(url,data,callback,dataType){
-	
+
 	if(mika.isFunction(data)){
     callback=data;
 	data=null;
@@ -1203,7 +1203,7 @@
 	success:callback||null,
 	dataType:dataType||"HTML"
 	});
-	
+
 	},
 	getJSON:function(url,data,callback){
 
@@ -1226,7 +1226,7 @@
 	});
 	},
 	ajax:function(configer){
-	
+
 	configer=mika.extend({
 	method:"GET",
 	url:"/",
@@ -1242,9 +1242,9 @@
 	},configer);
 	configer.method=configer.method.toUpperCase();
 	configer.dataType=configer.dataType.toUpperCase();
-	
-	
-	
+
+
+
 	function json2url(data){
 	if(data){
 	var result=[];
@@ -1255,11 +1255,11 @@
 	}
 	return data;
 	}
-	
+
 	function createxmlhttprequest(){
 	return window.XMLHttpRequest? new window.XMLHttpRequest() : new window.ActiveXObject("Microsoft.XMLHTTP");
 	}
-	
+
 
 	if(configer.data){
 	configer.data=json2url(configer.data);
@@ -1269,8 +1269,8 @@
 	configer.data=mika.string.trim(configer.url.substr(configer.url.indexOf('?')+1),'&')+"&"+configer.data;
 	configer.url=configer.url.substr(0,configer.url.indexOf('?'));	
 	}
-	
-	
+
+
 	if(configer.method==="GET"){
 	if(configer.data)configer.url+="?"+configer.data;
 	if(!configer.cache){
@@ -1283,16 +1283,16 @@
 	}
 	configer.data=null;
 	}
-	
-	
+
+
 	if(configer.method==="GET"&&configer.dataType==="SCRIPT"){
 	//js跨域获取,内部使用SCRIPT标签
 	return this.loadJS(configer.url,configer.scriptCharset,configer.success);
 	}
-	
-	
+
+
 	if(configer.method==="GET"&&configer.dataType==="JSONP"){
-	
+
 	var jsonpcallback="jsonp"+this.guid++;
 	//JSONP方法
 	window[jsonpcallback]=function(data){
@@ -1300,56 +1300,56 @@
 	window[jsonpcallback]=undefined;
 	try{ delete window[jsonpcallback]; } catch(e){}
 	}
-	
+
 	if(/\?/.test(configer.url)){
 	configer.url+="&"+configer.jsonp+"="+jsonpcallback;
 	}
 	else{
 	configer.url+="?"+configer.jsonp+"="+jsonpcallback;
 	}
-	
+
 	return this.loadJS(configer.url,configer.scriptCharset);
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 	var xhr=createxmlhttprequest();
-	
+
 	xhr.onreadystatechange=function(){
-	
-	
-	
+
+
+
 	if(xhr.readyState===0){
 
 	}
 	else if(xhr.readyState===1){
 
 	}
-	
+
 	else if(xhr.readyState===2){
-	
+
 
 	}
 	else if(xhr.readyState===3){
-	
+
 
 	}
 	else if(xhr.readyState===4){
 	if(xhr.status===200){
 	if(configer.dataType=="HTML")  {
     configer.success&&configer.success(xhr.responseText);  
-	
+
 	}
     else if(configer.dataType=="XML")  {
     configer.success&&configer.success(xhr.responseXML); 
-	
+
 	} 
 	else if(configer.dataType=="JSON") { 
-	
+
     configer.success&&configer.success(mika.parseJSON(xhr.responseText));
 	}
 	//else if(configer.dataType=="SCRIPT"){
@@ -1358,56 +1358,56 @@
 	//configer.success&&configer.success();
 	//}
     }  
-	
-	
-	
+
+
+
 	}
-	
-	
-	
+
+
+
 	};
-	
+
 	if(configer.username){
     xhr.open(configer.method,configer.url,configer.async,configer.username,configer.password);
 	}
 	else{
 	xhr.open(configer.method,configer.url,configer.async);
 	}
-	
-	
+
+
 	if(configer.method==="POST"){
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");  
 	}
 	xhr.send(configer.data);
-	
-	
+
+
 	return undefined;
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
 	});
-	
-	
-	
-	
+
+
+
+
     
     
     
@@ -1473,7 +1473,7 @@
         return this;
     };
     
-	
+
 	//原型引用，维护原型链
     mika.instance.prototype = mika.prototype = mika.fn;
     mika.prototype.constructor = mika;
