@@ -126,8 +126,7 @@
 
 	
 	
-	
-	 //*******************************************************
+    //*******************************************************
     //判断浏览器类型及其版本号
     //*******************************************************
     var
@@ -151,7 +150,11 @@
 	
 	目前已完成的方法：
 	
-	mika.isFunction,mika.isArray
+	mika.isFunction,mika.isArray,mika.isString,mika.isNumeric,
+	mika.isBoolean,mika.isDate,mika.isArguments,mika.isRegExp,
+	mika.isElement,mika.isDocument,mika.isNull,mika.isUndefined,
+	mika.isObject,mika.isNumberNaN,mika.isNotEmptyString,
+	mika.isEmptyObject,mika.isWindow.mika.getType
 	
 	
 	
