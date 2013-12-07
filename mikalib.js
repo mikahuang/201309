@@ -1,3 +1,5 @@
+//a similar jquery javascript library of mikalib
+
 (function(window, undefined) {
     var
     document = window.document,
